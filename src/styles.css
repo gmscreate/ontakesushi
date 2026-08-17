@@ -124,34 +124,6 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-
-  /* Mobile: corpo e rem um pouco maiores para leitura confortável (≈18px base) */
-  @media (max-width: 767px) {
-    html {
-      font-size: 112.5%;
-    }
-
-    body {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    :is(.text-xs) {
-      font-size: 0.8125rem;
-      line-height: 1.35;
-    }
-
-    :is(.text-sm) {
-      font-size: 0.9375rem;
-      line-height: 1.5;
-    }
-
-    :is(.text-\[9px\], .text-\[10px\], .text-\[11px\]) {
-      font-size: 0.8125rem !important;
-      line-height: 1.35;
-    }
-  }
-
   ::selection {
     background: var(--crimson);
     color: white;

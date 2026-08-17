@@ -1,5 +1,4 @@
 import { useReducedMotion } from "framer-motion";
-import { WaveBackdrop } from "@/components/site/WaveSection";
 import { SITE } from "@/data/site";
 
 type MarqueeItem = {
@@ -69,11 +68,9 @@ function MarqueeSegment({ item }: { item: MarqueeItem }) {
 export function Marquee() {
   return (
     <section
-      className="marquee-band group relative overflow-hidden border-y border-border"
+      className="marquee-band group relative overflow-hidden border-y border-border bg-white"
       aria-label="Destaques Ontake Sushi"
     >
-      <WaveBackdrop variant="light" />
-
       <div className="marquee-mask relative py-5 md:py-7">
         <div className="overflow-hidden">
           <MarqueeTrack items={ITEMS} />
