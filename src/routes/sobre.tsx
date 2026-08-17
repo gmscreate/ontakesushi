@@ -8,7 +8,6 @@ import {
   Eye,
   Compass,
   ArrowRight,
-  MessageCircle,
   MapPin,
   Moon,
   Sun,
@@ -393,17 +392,14 @@ function SobrePage() {
           <Reveal delay={0.2}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Button asChild variant="hero" size="xl">
-                <a href={SITE.whatsappOrderUrl} target="_blank" rel="noreferrer">
-                  <MessageCircle /> Peça no WhatsApp
-                </a>
+                <Link to="/peca-ja">
+                  Peça Já <ArrowRight />
+                </Link>
               </Button>
               <Button asChild variant="redOutline" size="xl">
                 <Link to="/cardapio">
                   Ver cardápio <ArrowRight />
                 </Link>
-              </Button>
-              <Button asChild variant="redOutline" size="xl">
-                <Link to="/peca-ja">Peça já</Link>
               </Button>
             </div>
           </Reveal>

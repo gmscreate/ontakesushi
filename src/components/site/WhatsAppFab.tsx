@@ -41,15 +41,20 @@ const fabMotion = {
   transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
 };
 
+const mobileFabButtonClassName =
+  "size-14 justify-center rounded-full p-0 [&_svg]:size-9 sm:size-auto sm:h-11 sm:justify-start sm:px-4 sm:py-3 sm:[&_svg]:size-6";
+
+const mobileFabIconClassName = "size-9 shrink-0 sm:size-6";
+
 export const deliveryButtonClassName =
-  "group gap-2 rounded-full px-4 py-3 shadow-[0_16px_40px_-10px_var(--crimson)] hover:scale-[1.03] [&_svg]:size-6";
+  "group gap-2 rounded-full px-4 py-3 shadow-[0_16px_40px_-10px_var(--crimson)] hover:scale-[1.03] sm:[&_svg]:size-6";
 
 export function WhatsAppFab() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   if (pathname === "/linkbio") return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2 md:bottom-8 md:right-8">
+    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 md:bottom-8 md:right-8 md:gap-2">
       <motion.a
         href={SITE.whatsappOrderUrl}
         target="_blank"
@@ -59,11 +64,12 @@ export function WhatsAppFab() {
         transition={{ ...fabMotion.transition, delay: 1 }}
         className={cn(
           buttonVariants({ variant: "whatsapp", size: "default" }),
-          "group gap-2 px-4 py-3",
+          mobileFabButtonClassName,
+          "group gap-2",
         )}
       >
         <span className="pointer-events-none absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/40" />
-        <WhatsAppIcon className="size-6 shrink-0" />
+        <WhatsAppIcon className={mobileFabIconClassName} />
         <span className="hidden text-sm font-semibold tracking-wide sm:inline">WhatsApp</span>
       </motion.a>
 
@@ -77,9 +83,10 @@ export function WhatsAppFab() {
         className={cn(
           buttonVariants({ variant: "premium", size: "default" }),
           deliveryButtonClassName,
+          mobileFabButtonClassName,
         )}
       >
-        <DeliveryIcon className="size-6 shrink-0" />
+        <DeliveryIcon className={mobileFabIconClassName} />
         <span className="hidden text-sm font-semibold tracking-wide sm:inline">Delivery</span>
       </motion.a>
     </div>

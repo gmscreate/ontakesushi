@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Instagram, MapPin, Phone, Mail, Clock, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/Logo";
+import { WaveBackdrop } from "@/components/site/WaveSection";
 import { SITE } from "@/data/site";
 
 const YEAR = 2026;
@@ -33,7 +34,7 @@ export function Footer() {
   if (pathname === "/linkbio") return null;
 
   return (
-    <footer className="dark section-dark-solid border-t border-white/10 text-foreground">
+    <footer className="dark section-dark-solid relative overflow-hidden border-t border-white/10 text-foreground">
       <div className="pointer-events-none absolute inset-0 bg-black" />
       <div className="pointer-events-none absolute inset-0 bg-seigaiha opacity-[0.14]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -45,20 +46,26 @@ export function Footer() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-page pt-14 pb-8 md:pt-16">
-        <div className="flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-black/40 p-8 text-center backdrop-blur-sm md:flex-row md:justify-between md:text-left">
-          <div>
-            <p className="text-[10px] font-semibold tracking-[0.35em] text-primary uppercase">
-              Peça agora
-            </p>
-            <p className="mt-2 font-display text-2xl text-white sm:text-3xl">
-              Sua mesa ou delivery em <span className="italic text-gradient-red">{SITE.city}</span>.
-            </p>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10">
+          <WaveBackdrop variant="dark-solid" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/20 via-black/85 to-black" />
+          <div className="pointer-events-none absolute inset-0 bg-radial-crimson opacity-50" />
+
+          <div className="relative z-10 flex flex-col items-center gap-6 p-8 text-center md:flex-row md:justify-between md:text-left">
+            <div>
+              <p className="text-[10px] font-semibold tracking-[0.35em] text-primary uppercase">
+                Peça agora
+              </p>
+              <p className="mt-2 font-display text-2xl text-white sm:text-3xl">
+                Sua mesa ou delivery em <span className="italic text-gradient-red">{SITE.city}</span>.
+              </p>
+            </div>
+            <Button asChild variant="hero" size="lg" className="shrink-0">
+              <a href={SITE.whatsappOrderUrl} target="_blank" rel="noreferrer">
+                <WhatsAppIcon className="size-5 shrink-0" /> WhatsApp
+              </a>
+            </Button>
           </div>
-          <Button asChild variant="hero" size="lg" className="shrink-0">
-            <a href={SITE.whatsappOrderUrl} target="_blank" rel="noreferrer">
-              <WhatsAppIcon className="size-5 shrink-0" /> WhatsApp
-            </a>
-          </Button>
         </div>
 
         <div className="mt-14 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-10">

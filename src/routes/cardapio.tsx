@@ -5,7 +5,7 @@ import { Sparkles } from "lucide-react";
 import { MenuDishCard } from "@/components/site/MenuDishCard";
 import { PageHero } from "@/components/site/PageHero";
 import { MenuFilters } from "@/components/site/MenuFilters";
-import { MENU, type MenuCategory } from "@/data/menu";
+import { MENU, groupMenuItemsByCategory, sortMenuItems, type MenuCategory } from "@/data/menu";
 import { SITE, pageTitle } from "@/data/site";
 import { pageMeta } from "@/lib/seo";
 import { cardGridStretch, cn } from "@/lib/utils";
@@ -26,13 +26,24 @@ function CardapioPage() {
   const [query, setQuery] = useState("");
 
   const items = useMemo(() => {
-    return MENU.filter((m) => {
+    const filtered = MENU.filter((m) => {
       const okCat = active === "Todos" || m.category === active;
       const okQ =
         !query || (m.name + " " + m.description).toLowerCase().includes(query.toLowerCase());
       return okCat && okQ;
     });
+    return sortMenuItems(filtered);
   }, [active, query]);
+
+  const groupedItems = useMemo(() => {
+    if (active !== "Todos" || query) return null;
+    return groupMenuItemsByCategory(items);
+  }, [active, query, items]);
+
+  const gridClassName = cn(
+    "grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3",
+    cardGridStretch,
+  );
 
   return (
     <>
@@ -90,6 +101,48 @@ function CardapioPage() {
                   Tente ajustar sua busca ou explorar outra categoria.
                 </p>
               </motion.div>
+            ) : groupedItems ? (
+              <motion.div
+                key="grouped"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="space-y-14 md:space-y-16"
+              >
+                {groupedItems.map((group, groupIndex) => (
+                  <section key={group.category} aria-labelledby={`menu-${group.category}`}>
+                    <div className="mb-6 flex items-center gap-4 md:mb-8">
+                      <h3
+                        id={`menu-${group.category}`}
+                        className="font-display text-2xl text-foreground sm:text-3xl"
+                      >
+                        {group.category}
+                      </h3>
+                      <span className="text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase tabular-nums">
+                        {group.items.length} {group.items.length === 1 ? "prato" : "pratos"}
+                      </span>
+                      <span className="h-px flex-1 bg-border/60" />
+                    </div>
+                    <div className={gridClassName}>
+                      {group.items.map((d, i) => (
+                        <motion.div
+                          key={d.id}
+                          initial={{ opacity: 0, y: 16 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: Math.min(groupIndex * 0.04 + i * 0.03, 0.3),
+                          }}
+                          className="min-h-0"
+                        >
+                          <MenuDishCard item={d} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </motion.div>
             ) : (
               <motion.div
                 key={`${active}-${query}`}
@@ -97,10 +150,7 @@ function CardapioPage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
-                className={cn(
-                  "grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3",
-                  cardGridStretch,
-                )}
+                className={gridClassName}
               >
                 {items.map((d, i) => (
                   <motion.div

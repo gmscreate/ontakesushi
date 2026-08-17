@@ -221,6 +221,23 @@ export const MENU: MenuItem[] = [
     category: "Entradas",
     image: "/menu/mp-321980.jpg",
   },
+  {
+    id: "mp-847542",
+    name: "Monte SEU OVO",
+    description: "Monte seu ovo de sushi com os recheios de sua preferência.",
+    price: 22,
+    fromPrice: true,
+    category: "Entradas",
+    image: "/menu/mp-847542.jpg",
+  },
+  {
+    id: "mp-1326484",
+    name: "Salmão Grelhado 150g",
+    description: "Posta de salmão grelhado. Aproximadamente 150g.",
+    price: 33,
+    category: "Entradas",
+    image: "/menu/mp-1326484.jpg",
+  },
 
   /* -------- Combos -------- */
   {
@@ -810,6 +827,14 @@ export const MENU: MenuItem[] = [
     category: "Temaki",
     image: "/menu/mp-256058.jpg",
   },
+  {
+    id: "mp-1231586",
+    name: "Temaki Montagem",
+    description: "Temaki personalizado. Escolha os recheios na hora do pedido.",
+    price: 30,
+    category: "Temaki",
+    image: "/menu/mp-1231586.jpg",
+  },
 
   /* -------- Niguiri -------- */
   {
@@ -1250,38 +1275,29 @@ export const MENU: MenuItem[] = [
     category: "Extras",
     image: "/menu/mp-1157584.jpg",
   },
-
-  /* -------- Entradas -------- */
-  {
-    id: "mp-847542",
-    name: "Monte SEU OVO",
-    description: "Monte seu ovo de sushi com os recheios de sua preferência.",
-    price: 22,
-    fromPrice: true,
-    category: "Entradas",
-    image: "/menu/mp-847542.jpg",
-  },
-
-  /* -------- Temaki -------- */
-  {
-    id: "mp-1231586",
-    name: "Temaki Montagem",
-    description: "Temaki personalizado. Escolha os recheios na hora do pedido.",
-    price: 30,
-    category: "Temaki",
-    image: "/menu/mp-1231586.jpg",
-  },
-
-  /* -------- Entradas -------- */
-  {
-    id: "mp-1326484",
-    name: "Salmão Grelhado 150g",
-    description: "Posta de salmão grelhado. Aproximadamente 150g.",
-    price: 33,
-    category: "Entradas",
-    image: "/menu/mp-1326484.jpg",
-  },
 ];
+
+export function sortMenuItems(items: MenuItem[]) {
+  const categoryOrder = new Map(CATEGORIES.map((category, index) => [category, index]));
+  const menuOrder = new Map(MENU.map((item, index) => [item.id, index]));
+
+  return [...items].sort((a, b) => {
+    const categoryDiff =
+      (categoryOrder.get(a.category) ?? Number.MAX_SAFE_INTEGER) -
+      (categoryOrder.get(b.category) ?? Number.MAX_SAFE_INTEGER);
+    if (categoryDiff !== 0) return categoryDiff;
+    return (menuOrder.get(a.id) ?? 0) - (menuOrder.get(b.id) ?? 0);
+  });
+}
+
+export function groupMenuItemsByCategory(items: MenuItem[]) {
+  const sorted = sortMenuItems(items);
+
+  return CATEGORIES.map((category) => ({
+    category,
+    items: sorted.filter((item) => item.category === category),
+  })).filter((group) => group.items.length > 0);
+}
 
 const BARATO_DIA_BY_WEEKDAY: Record<string, string> = {
   "quarta-feira": "mp-1219365",
