@@ -1,0 +1,596 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+ * Ontake Sushi — Editorial Premium Design System
+ * Predominant White / Ink Black / Crimson Red
+ * ============================================================ */
+
+@theme inline {
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-jp: "Noto Serif JP", serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-crimson: var(--crimson);
+  --color-crimson-glow: var(--crimson-glow);
+
+  --shadow-glow: 0 0 60px -10px color-mix(in oklab, var(--crimson) 30%, transparent);
+  --shadow-elevated: 0 30px 80px -30px oklch(0 0 0 / 0.18);
+}
+
+/* Light (default) — editorial white */
+:root {
+  --paper: oklch(1 0 0); /* pure white */
+  --ink: oklch(0.14 0 0); /* deep charcoal near-black */
+  --background: oklch(0.97 0.002 106); /* stone-100 — fundo editorial das seções claras */
+  --foreground: oklch(0.16 0 0); /* text near-black */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0 0);
+
+  --crimson: oklch(0.52 0.22 25); /* #C1121F */
+  --crimson-glow: oklch(0.62 0.24 28);
+  --primary: oklch(0.52 0.22 25);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.16 0 0);
+  --muted: oklch(0.955 0.002 106);
+  --muted-foreground: oklch(0.48 0.005 60);
+  --accent: oklch(0.95 0.01 25);
+  --accent-foreground: oklch(0.16 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.14 0 0 / 0.08);
+  --input: oklch(0.14 0 0 / 0.12);
+  --ring: oklch(0.52 0.22 25);
+
+  --radius: 1rem;
+
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.16 0 0);
+  --sidebar-primary: oklch(0.52 0.22 25);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.96 0 0);
+  --sidebar-accent-foreground: oklch(0.16 0 0);
+  --sidebar-border: oklch(0.14 0 0 / 0.08);
+  --sidebar-ring: oklch(0.52 0.22 25);
+}
+
+/* Dark scope — used to flip inverted sections and modals */
+.dark {
+  --paper: oklch(0.1 0 0);
+  --ink: oklch(0.1 0 0);
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.13 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.13 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --secondary: oklch(0.16 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.72 0 0);
+  --accent: oklch(0.2 0.02 25);
+  --accent-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.14);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--crimson);
+    color: white;
+  }
+}
+
+/* ============================================================
+ * Utilities
+ * ============================================================ */
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+@utility font-jp {
+  font-family: var(--font-jp);
+}
+
+@utility text-gradient-red {
+  background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-glow) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-ink {
+  background: linear-gradient(
+    135deg,
+    var(--foreground) 0%,
+    color-mix(in oklab, var(--foreground) 60%, var(--crimson)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-noise {
+  background-image:
+    radial-gradient(circle at 20% 30%, oklch(0.52 0.22 25 / 0.06) 0, transparent 55%),
+    radial-gradient(circle at 80% 70%, oklch(0.52 0.22 25 / 0.04) 0, transparent 55%);
+}
+
+/* Glass on light */
+@utility glass {
+  background: oklch(1 0 0 / 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid oklch(0.14 0 0 / 0.06);
+  box-shadow: 0 10px 40px -20px oklch(0 0 0 / 0.08);
+}
+
+/* Glass on dark contexts */
+@utility glass-dark {
+  background: oklch(0.1 0 0 / 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid oklch(1 0 0 / 0.08);
+}
+
+@utility hairline-red {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--crimson);
+    margin-right: 0.75rem;
+    vertical-align: middle;
+  }
+}
+
+/* Editorial card — light */
+@utility card-premium {
+  background: var(--card);
+  border: 1px solid oklch(0.14 0 0 / 0.06);
+  border-radius: 1.25rem;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    border-color: oklch(0.52 0.22 25 / 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -25px oklch(0.14 0 0 / 0.18);
+  }
+}
+
+/* On dark sections, card-premium flips to ink — unless .bg-white is set explicitly */
+.dark .card-premium:not(.bg-white) {
+  background: linear-gradient(180deg, oklch(0.15 0 0) 0%, oklch(0.1 0 0) 100%);
+  border: 1px solid oklch(1 0 0 / 0.07);
+  &:hover {
+    border-color: oklch(0.52 0.22 25 / 0.45);
+    box-shadow:
+      0 40px 80px -30px oklch(0 0 0 / 0.9),
+      0 0 60px -10px oklch(0.52 0.22 25 / 0.35);
+  }
+}
+
+@utility btn-glow {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 40px -5px var(--crimson);
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+@utility btn-shine {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: linear-gradient(105deg, transparent 38%, oklch(1 0 0 / 0.16) 50%, transparent 62%);
+    transform: translateX(-120%);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    transform: translateX(120%);
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Seigaiha (subtle wave pattern) — light variant */
+@utility bg-seigaiha {
+  background-color: transparent;
+  background-image:
+    radial-gradient(
+      circle at 50% 100%,
+      transparent 12px,
+      oklch(0.14 0 0 / 0.045) 12.5px,
+      oklch(0.14 0 0 / 0.045) 13px,
+      transparent 13.5px
+    ),
+    radial-gradient(
+      circle at 0 100%,
+      transparent 12px,
+      oklch(0.14 0 0 / 0.045) 12.5px,
+      oklch(0.14 0 0 / 0.045) 13px,
+      transparent 13.5px
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      transparent 12px,
+      oklch(0.14 0 0 / 0.045) 12.5px,
+      oklch(0.14 0 0 / 0.045) 13px,
+      transparent 13.5px
+    );
+  background-size: 40px 20px;
+  background-position:
+    0 0,
+    20px 0,
+    -20px 0;
+}
+
+.dark .bg-seigaiha {
+  background-image:
+    radial-gradient(
+      circle at 50% 100%,
+      transparent 12px,
+      oklch(1 0 0 / 0.035) 12.5px,
+      oklch(1 0 0 / 0.035) 13px,
+      transparent 13.5px
+    ),
+    radial-gradient(
+      circle at 0 100%,
+      transparent 12px,
+      oklch(1 0 0 / 0.035) 12.5px,
+      oklch(1 0 0 / 0.035) 13px,
+      transparent 13.5px
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      transparent 12px,
+      oklch(1 0 0 / 0.035) 12.5px,
+      oklch(1 0 0 / 0.035) 13px,
+      transparent 13.5px
+    );
+}
+
+@utility bg-radial-crimson {
+  background-image:
+    radial-gradient(ellipse at top, oklch(0.52 0.22 25 / 0.1) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom, oklch(0.52 0.22 25 / 0.06) 0%, transparent 55%);
+}
+
+@utility divider-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  &::before,
+  &::after {
+    content: "";
+    height: 1px;
+    width: clamp(3rem, 20vw, 10rem);
+    background: linear-gradient(90deg, transparent, oklch(0.14 0 0 / 0.2), transparent);
+  }
+}
+
+.dark .divider-mark {
+  &::before,
+  &::after {
+    background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.2), transparent);
+  }
+}
+
+@utility hover-glow-red {
+  transition:
+    box-shadow 0.5s ease,
+    transform 0.5s ease;
+  &:hover {
+    box-shadow:
+      0 0 0 1px oklch(0.52 0.22 25 / 0.45),
+      0 20px 60px -10px oklch(0.52 0.22 25 / 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+/* Refined luxury card */
+@utility card-lux {
+  background: var(--card);
+  border: 1px solid oklch(0.14 0 0 / 0.07);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 1px 0 oklch(1 0 0 / 0.6) inset,
+    0 20px 40px -25px oklch(0.14 0 0 / 0.15);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    border-color: oklch(0.52 0.22 25 / 0.4);
+    transform: translateY(-6px);
+    box-shadow:
+      0 1px 0 oklch(1 0 0 / 0.8) inset,
+      0 40px 80px -30px oklch(0.14 0 0 / 0.28),
+      0 0 60px -10px oklch(0.52 0.22 25 / 0.2);
+  }
+}
+
+.dark .card-lux {
+  background: linear-gradient(180deg, oklch(0.15 0 0) 0%, oklch(0.09 0 0) 100%);
+  border: 1px solid oklch(1 0 0 / 0.07);
+  box-shadow:
+    0 1px 0 oklch(1 0 0 / 0.04) inset,
+    0 20px 40px -20px oklch(0 0 0 / 0.6);
+  &:hover {
+    border-color: oklch(0.52 0.22 25 / 0.45);
+    box-shadow:
+      0 1px 0 oklch(1 0 0 / 0.06) inset,
+      0 40px 80px -30px oklch(0 0 0 / 0.9),
+      0 0 60px -10px oklch(0.52 0.22 25 / 0.35);
+  }
+}
+
+/* Explicit dark card — prefer darkSurfaceCard Tailwind classes in components */
+@utility card-lux-dark {
+  border: 1px solid rgb(255 255 255 / 0.07);
+  border-radius: 1.5rem;
+  background-color: #141414;
+  background-image: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 20px 50px -24px rgb(0 0 0 / 0.85);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    border-color: oklch(0.52 0.22 25 / 0.35);
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 40px 80px -30px rgb(0 0 0 / 0.9),
+      0 0 60px -10px oklch(0.52 0.22 25 / 0.35);
+  }
+}
+
+/* Skeleton shimmer */
+@utility skeleton-shimmer {
+  background: linear-gradient(90deg, oklch(0.94 0 0), oklch(0.98 0 0), oklch(0.94 0 0));
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+.dark .skeleton-shimmer {
+  background: linear-gradient(90deg, oklch(0.12 0 0), oklch(0.16 0 0), oklch(0.12 0 0));
+  background-size: 200% 100%;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Sumi-e brush stroke (SVG-free) — a soft red streak */
+@utility brush-red {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -0.35em 0;
+    height: 0.35em;
+    background: radial-gradient(ellipse at 30% 50%, oklch(0.52 0.22 25 / 0.35), transparent 70%);
+    filter: blur(2px);
+    pointer-events: none;
+  }
+}
+
+/* Editorial hairline (thin uppercase eyebrow decoration) */
+@utility eyebrow-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  &::before {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: var(--crimson);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility marquee-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+@layer components {
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .marquee-track--editorial {
+    animation: marquee-scroll 48s linear infinite;
+  }
+
+  .marquee-band:hover .marquee-track--editorial {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track--editorial {
+    animation: none;
+  }
+}
+
+/* ============================================================
+ * Section spacing — consistent vertical rhythm sitewide
+ * ============================================================ */
+
+@utility section {
+  padding-block: clamp(4.5rem, 6.5vw, 6.5rem);
+}
+
+@utility section-lg {
+  padding-block: clamp(5.5rem, 8vw, 8rem);
+}
+
+@utility section-sm {
+  padding-block: clamp(3rem, 4.5vw, 4.25rem);
+}
+
+@utility section-header {
+  margin-top: clamp(2.75rem, 4vw, 4rem);
+}
+
+@utility section-intro {
+  gap: clamp(2rem, 3.5vw, 3rem);
+}
+
+@utility section-split {
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Page gutters — mobile stays compact; desktop pulls content off the edges */
+@utility px-page {
+  padding-inline: 1.5rem;
+
+  @media (min-width: 1024px) {
+    padding-inline: 4rem;
+  }
+
+  @media (min-width: 1280px) {
+    padding-inline: 5.5rem;
+  }
+}
+
+/* Dark section shell — unlayered so utilities cannot override background/text */
+.dark.section-dark {
+  position: relative;
+  overflow: hidden;
+  background-color: oklch(0.1 0 0);
+  color: oklch(0.98 0 0);
+}
+
+.dark.section-dark-solid {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  color: oklch(0.98 0 0);
+}
+
+.heading-dark {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.05;
+  color: oklch(0.98 0 0);
+}
+
+@media (min-width: 640px) {
+  .heading-dark {
+    font-size: clamp(3rem, 5.5vw, 3.75rem);
+  }
+}
+
+/* Force dark surfaces when utility layer order would otherwise win */
+.dark.section-dark,
+.dark.section-dark-solid {
+  background-color: #000 !important;
+}
+
+.dark .card-lux:not(.bg-white),
+.card-lux-dark {
+  background-color: #141414 !important;
+  background-image: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+  border-color: rgb(255 255 255 / 0.07) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 20px 40px -20px rgb(0 0 0 / 0.6) !important;
+}
+
+/* White editorial cards on dark sections (Filosofia, etc.) */
+.dark .card-premium.bg-white {
+  --foreground: oklch(0.16 0 0);
+  --muted-foreground: oklch(0.48 0.005 60);
+  --muted: oklch(0.965 0.003 60);
+  --border: oklch(0.14 0 0 / 0.08);
+  --card: oklch(1 0 0);
+  --secondary: oklch(0.96 0 0);
+  --accent: oklch(0.95 0.01 25);
+  background-color: #fff !important;
+  background-image: none !important;
+  border-color: oklch(0.14 0 0 / 0.06) !important;
+  box-shadow: 0 30px 60px -25px oklch(0.14 0 0 / 0.18) !important;
+  color: oklch(0.16 0 0) !important;
+}
