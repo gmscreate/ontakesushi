@@ -51,7 +51,7 @@ export const deliveryButtonClassName =
 
 export function WhatsAppFab() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  if (pathname === "/linkbio") return null;
+  if (pathname === "/linkbio" || pathname === "/manual-de-marca") return null;
 
   return (
     <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 md:bottom-8 md:right-8 md:gap-2">
