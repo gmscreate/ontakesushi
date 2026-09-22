@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CardapioRouteImport } from './routes/cardapio'
 import { Route as GaleriaRouteImport } from './routes/galeria'
 import { Route as LinkbioRouteImport } from './routes/linkbio'
+import { Route as ManualDeMarcaRouteImport } from './routes/manual-de-marca'
 import { Route as PecaJaRouteImport } from './routes/peca-ja'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -37,6 +38,11 @@ const GaleriaRoute = GaleriaRouteImport.update({
 const LinkbioRoute = LinkbioRouteImport.update({
   id: '/linkbio',
   path: '/linkbio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManualDeMarcaRoute = ManualDeMarcaRouteImport.update({
+  id: '/manual-de-marca',
+  path: '/manual-de-marca',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PecaJaRoute = PecaJaRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/cardapio': typeof CardapioRoute
   '/galeria': typeof GaleriaRoute
   '/linkbio': typeof LinkbioRoute
+  '/manual-de-marca': typeof ManualDeMarcaRoute
   '/peca-ja': typeof PecaJaRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/cardapio': typeof CardapioRoute
   '/galeria': typeof GaleriaRoute
   '/linkbio': typeof LinkbioRoute
+  '/manual-de-marca': typeof ManualDeMarcaRoute
   '/peca-ja': typeof PecaJaRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/cardapio': typeof CardapioRoute
   '/galeria': typeof GaleriaRoute
   '/linkbio': typeof LinkbioRoute
+  '/manual-de-marca': typeof ManualDeMarcaRoute
   '/peca-ja': typeof PecaJaRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/cardapio'
     | '/galeria'
     | '/linkbio'
+    | '/manual-de-marca'
     | '/peca-ja'
     | '/privacidade'
     | '/sitemap.xml'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/cardapio'
     | '/galeria'
     | '/linkbio'
+    | '/manual-de-marca'
     | '/peca-ja'
     | '/privacidade'
     | '/sitemap.xml'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/cardapio'
     | '/galeria'
     | '/linkbio'
+    | '/manual-de-marca'
     | '/peca-ja'
     | '/privacidade'
     | '/sitemap.xml'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   CardapioRoute: typeof CardapioRoute
   GaleriaRoute: typeof GaleriaRoute
   LinkbioRoute: typeof LinkbioRoute
+  ManualDeMarcaRoute: typeof ManualDeMarcaRoute
   PecaJaRoute: typeof PecaJaRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/linkbio'
       fullPath: '/linkbio'
       preLoaderRoute: typeof LinkbioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manual-de-marca': {
+      id: '/manual-de-marca'
+      path: '/manual-de-marca'
+      fullPath: '/manual-de-marca'
+      preLoaderRoute: typeof ManualDeMarcaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/peca-ja': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   CardapioRoute: CardapioRoute,
   GaleriaRoute: GaleriaRoute,
   LinkbioRoute: LinkbioRoute,
+  ManualDeMarcaRoute: ManualDeMarcaRoute,
   PecaJaRoute: PecaJaRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

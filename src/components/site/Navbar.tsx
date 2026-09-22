@@ -48,7 +48,7 @@ export function Navbar() {
     };
   }, [open]);
 
-  if (pathname === "/linkbio") return null;
+  if (pathname === "/linkbio" || pathname === "/manual-de-marca") return null;
 
   const onDark = true;
 

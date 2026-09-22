@@ -31,7 +31,7 @@ const LEGAL_LINKS = [
 
 export function Footer() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  if (pathname === "/linkbio") return null;
+  if (pathname === "/linkbio" || pathname === "/manual-de-marca") return null;
 
   return (
     <footer className="dark section-dark-solid relative overflow-hidden border-t border-white/10 text-foreground">
@@ -57,7 +57,8 @@ export function Footer() {
                 Peça agora
               </p>
               <p className="mt-2 font-display text-2xl text-white sm:text-3xl">
-                Sua mesa ou delivery em <span className="italic text-gradient-red">{SITE.city}</span>.
+                Sua mesa ou delivery em{" "}
+                <span className="italic text-gradient-red">{SITE.city}</span>.
               </p>
             </div>
             <Button asChild variant="hero" size="lg" className="shrink-0">
