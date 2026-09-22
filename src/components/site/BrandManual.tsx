@@ -107,7 +107,7 @@ function Chapter({
       </div>
       <h2
         className={cn(
-          "mt-5 font-display text-4xl leading-[1.02] sm:text-5xl xl:text-[3.5rem]",
+          "mt-5 font-display text-3xl leading-[1.05] sm:text-4xl md:text-5xl xl:text-[3.5rem]",
           dark ? "text-white" : "text-[#1A1A1A]",
         )}
       >
@@ -200,7 +200,7 @@ function ElementCard({ label, children }: { label: string; children: ReactNode }
 export function BrandManual() {
   return (
     <div className="overflow-x-hidden bg-background text-[#1A1A1A]">
-      <section className="dark relative h-[100svh] min-h-[100svh] w-full overflow-hidden bg-black text-white xl:!h-[1080px] xl:!max-h-[1080px] xl:!min-h-[1080px]">
+      <section className="dark relative h-[100svh] max-h-[100svh] min-h-[100svh] w-full overflow-hidden bg-black text-white xl:h-[1080px] xl:max-h-[min(100svh,1080px)] xl:min-h-[min(100svh,1080px)]">
         <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden select-none">
           <span
             className="font-jp leading-none text-white/[0.04]"
@@ -224,35 +224,35 @@ export function BrandManual() {
           <div className="pointer-events-none absolute inset-0 bg-seigaiha opacity-20" />
         </div>
 
-        <div className="relative z-20 mx-auto flex h-full min-h-[100svh] w-full max-w-7xl flex-col justify-center px-page py-16 xl:!h-[1080px] xl:!max-h-[1080px] xl:!min-h-[1080px] xl:py-24">
-          <div className="flex items-center gap-4">
-            <span className="h-px w-10 bg-primary sm:w-14" />
-            <p className="text-[10px] tracking-[0.35em] text-white/70 uppercase sm:tracking-[0.4em]">
-              Manual de marca
+        <div className="relative z-20 flex h-full w-full flex-col justify-center px-page py-8 sm:py-12 xl:py-16 [@media(max-height:760px)]:py-6">
+          <div className="w-full max-w-xl md:max-w-[36%] xl:max-w-[40%]">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-8 shrink-0 bg-primary sm:w-14" />
+              <p className="text-[10px] tracking-[0.28em] text-white/70 uppercase sm:tracking-[0.4em]">
+                Manual de marca
+              </p>
+            </div>
+            <h1 className="mt-5 sm:mt-8 [@media(max-height:760px)]:mt-4">
+              <Logo imgClassName="h-20 w-auto max-w-full sm:h-28 md:h-40 xl:h-52 2xl:h-60 [@media(max-height:760px)]:h-16 [@media(max-height:760px)]:sm:h-24 [@media(max-height:760px)]:xl:h-36" />
+            </h1>
+            <p className="mt-5 max-w-full text-base leading-relaxed font-light text-white/70 sm:mt-8 sm:text-lg [@media(max-height:760px)]:mt-3">
+              Identidade Visual &amp; Sistema de Marca
             </p>
+            <nav
+              aria-label="Seções do manual"
+              className="mt-6 flex max-w-full flex-wrap gap-x-4 gap-y-2 sm:gap-x-5 sm:gap-y-3 xl:mt-10 [@media(max-height:760px)]:mt-4"
+            >
+              {CHAPTERS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-[10px] font-semibold tracking-[0.22em] text-white/55 uppercase transition-colors hover:text-primary"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
           </div>
-          <h1 className="mt-8">
-            <Logo
-              imgClassName="h-24 w-auto max-w-full sm:h-32 md:h-44 xl:h-56 2xl:h-64"
-            />
-          </h1>
-          <p className="mt-8 max-w-xl text-base leading-relaxed font-light text-white/70 sm:mt-10 sm:text-lg">
-            Identidade Visual &amp; Sistema de Marca
-          </p>
-          <nav
-            aria-label="Seções do manual"
-            className="mt-10 flex max-w-xl flex-wrap gap-x-5 gap-y-3 xl:mt-12"
-          >
-            {CHAPTERS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-[10px] font-semibold tracking-[0.22em] text-white/55 uppercase transition-colors hover:text-primary"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
         </div>
       </section>
 
@@ -271,17 +271,18 @@ export function BrandManual() {
               const Icon = item.icon;
               return (
                 <Reveal key={item.title} delay={i * 0.05} className="h-full">
-                  <article className="card-lux group relative flex h-full min-h-64 flex-col overflow-hidden rounded-3xl p-6 sm:p-8 xl:min-h-72 xl:p-8">
+                  <article className="card-lux group relative flex h-full min-h-64 min-w-0 flex-col overflow-hidden rounded-3xl p-6 sm:p-8 xl:min-h-72">
                     <span
-                      className="pointer-events-none absolute -top-3 -right-1 font-jp leading-none text-primary/[0.07] transition-transform duration-700 select-none group-hover:scale-110"
-                      style={{ fontSize: "5.5rem" }}
+                      className="pointer-events-none absolute top-2 right-2 font-jp text-[4.25rem] leading-none text-primary/[0.07] transition-transform duration-700 select-none group-hover:scale-110 sm:text-[5.5rem]"
                       aria-hidden="true"
                     >
                       {item.watermark}
                     </span>
 
                     <div className="relative flex items-center gap-3">
-                      <span className="font-jp text-2xl text-primary xl:text-3xl">{item.kanji}</span>
+                      <span className="font-jp text-2xl text-primary xl:text-3xl">
+                        {item.kanji}
+                      </span>
                       <span className="h-px flex-1 bg-border transition-colors duration-500 group-hover:bg-primary/50" />
                       <span className="text-[10px] font-semibold tracking-[0.35em] text-muted-foreground">
                         0{i + 1}
@@ -386,7 +387,9 @@ export function BrandManual() {
                 <p className="text-[10px] font-semibold tracking-[0.22em] uppercase opacity-80 sm:tracking-[0.28em]">
                   {color.role}
                 </p>
-                <h3 className="mt-4 font-display text-2xl leading-none xl:text-[1.75rem]">{color.name}</h3>
+                <h3 className="mt-4 font-display text-2xl leading-none xl:text-[clamp(1.35rem,1.5vw,1.75rem)]">
+                  {color.name}
+                </h3>
                 <p className="mt-3 text-sm tracking-[0.18em]">{color.hex}</p>
               </article>
             ))}
@@ -456,12 +459,16 @@ export function BrandManual() {
               lede="Poucos elementos, sempre os mesmos: sol, montanha minimalista, linha champagne e o kraft como matéria."
             />
           </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:mt-16 xl:grid-cols-3 2xl:grid-cols-6">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:mt-16">
             <ElementCard label="Sol">
               <span className="block size-24 rounded-full" style={{ background: RED }} />
             </ElementCard>
             <ElementCard label="Montanha">
-              <svg viewBox="0 0 160 120" className="h-28 w-40" aria-hidden="true">
+              <svg
+                viewBox="0 0 160 120"
+                className="h-24 w-auto max-w-full sm:h-28"
+                aria-hidden="true"
+              >
                 <circle cx="80" cy="72" r="34" fill={RED} />
                 <path d="M16 108 L80 24 L144 108 Z" fill="#F4EFE6" />
                 <path d="M80 40 L64 70 L80 60 L96 74 L80 40 Z" fill={INK} />
@@ -667,16 +674,16 @@ export function BrandManual() {
               lede="Cinco regras para qualquer ponto de contato, do adesivo ao salão."
             />
           </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:mt-16 xl:grid-cols-5 xl:gap-5">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:mt-16 xl:gap-5">
             {RULES.map((rule, i) => (
               <article
                 key={rule.title}
-                className="flex h-full flex-col rounded-2xl border border-black/10 bg-background p-6 xl:p-8"
+                className="flex h-full min-w-0 flex-col rounded-2xl border border-black/10 bg-background p-6 sm:p-8"
               >
                 <span className="text-[10px] font-semibold tracking-[0.28em] text-primary uppercase">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-6 font-display text-2xl leading-none text-[#1A1A1A] xl:text-[1.75rem]">
+                <h3 className="mt-6 font-display text-3xl leading-none text-[#1A1A1A]">
                   {rule.title}
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/65">{rule.text}</p>
@@ -696,7 +703,7 @@ export function BrandManual() {
                 12 — Galeria
               </p>
             </div>
-            <h2 className="mt-8 max-w-5xl font-display text-5xl leading-[0.95] text-white sm:text-7xl xl:text-[5.5rem]">
+            <h2 className="mt-6 max-w-5xl font-display text-4xl leading-[0.95] text-white sm:mt-8 sm:text-6xl xl:text-7xl 2xl:text-[5.5rem]">
               Mais que sushi.
               <span className="mt-2 block italic">Uma experiência.</span>
             </h2>
